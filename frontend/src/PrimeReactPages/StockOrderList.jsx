@@ -21,7 +21,7 @@ export default function OrderStockList() {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentUser, setCurrentUser] = useState(null);
-    const [status, setStatus] = useState([])
+    // const [status, setStatus] = useState([])
     const navigate = useNavigate();
 
     const handleStatusChange = (id)=>{
@@ -146,7 +146,7 @@ export default function OrderStockList() {
                                         >
                                             Change Status
                                         </button>: ''}
-                                        {currentUser.role === 'SUPPLIER' & order.status != 'DELIVERED'?
+                                        {currentUser.role === 'SUPPLIER' & order.status != 'DELIVERED' & order.status != 'RECEIVED'?
                                         <button
                                             onClick={() => handleStatusChange(order.id)}
                                             className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm hover:bg-slate-50 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500 transition-colors"

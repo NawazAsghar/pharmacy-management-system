@@ -96,7 +96,8 @@ class Bill_item_serializer(serializers.ModelSerializer):
     )
     class Meta:
         model = Bill_item
-        fields = ['id', 'item', 'item_id', 'quantity']
+        fields = ['id', 'item', 'item_id', 'quantity', 'price']
+        read_only_fields = ['price']
 
 class Bill_serializer(serializers.ModelSerializer):
     items = Bill_item_serializer(many=True)
@@ -109,7 +110,7 @@ class Bill_serializer(serializers.ModelSerializer):
         read_only_fields = ['totalBill_amount', 'created_at']
 
     def create(self, validated_data):
-        items_data = validated_data.pop('bill', [])
+        items_data = validated_data.pop('items', [])
         bill = Bill.objects.create(**validated_data)
 
         totalBill = 0;
@@ -126,9 +127,6 @@ class Bill_serializer(serializers.ModelSerializer):
                 )
 
             totalBill += line_total
-
-            Inventory.objects.delete(id = item_obj.id)
-
         bill.totalBill_amount = totalBill
         bill.save()
         return bill

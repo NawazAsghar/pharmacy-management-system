@@ -12,7 +12,7 @@ import logo from '../assets/logo/logo_icon.png';
 import api from '../API';
 
 const PHARMACIST_SECTIONS = [
-  { label: 'Counter Bill', path: '/counterBill' },
+  { label: 'Bills', path: '/Bills' },
   { label: 'Suppliers', path: '/suppliers' },
   { label: 'Inventory', path: '/inventory' },
   { label: 'Orders', path: '/stockOrderList' },
@@ -23,8 +23,9 @@ const SUPPLIER_SECTIONS = [
 
 export default function Nav() {
   const navigate = useNavigate();
-  const location = useLocation(); // Tracks route changes to update auth state automatically
+  const location = useLocation();
   const [currentUser, setCurrentUser] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const getCurrentUser = async () => {
     const token = localStorage.getItem('access');
@@ -49,7 +50,6 @@ export default function Nav() {
     navigate('/login', { replace: true });
   };
 
-  // Re-check authentication status on route navigation
   useEffect(() => {
     getCurrentUser();
   }, [location.pathname]);
@@ -60,11 +60,12 @@ export default function Nav() {
 
         {/* Mobile Menu Drawer & Brand Logo */}
         <div className="flex items-center gap-3">
-          {/* Mobile Drawer (Only visible when logged in) */}
           {currentUser && (
-            <Drawer.Root>
+            <Drawer.Root open={drawerOpen} onOpenChange={setDrawerOpen}>
               <div className="md:hidden">
-                <Drawer.Trigger as={Button} iconOnly variant="text" severity="secondary" rounded aria-label="Open menu">
+                <Drawer.Trigger as={Button} iconOnly variant="text" severity="secondary" rounded aria-label="Open menu"
+                  onClick={() => setDrawerOpen(true)}
+                >
                   <Bars />
                 </Drawer.Trigger>
               </div>
@@ -73,7 +74,9 @@ export default function Nav() {
                 <Drawer.Popup className="w-80!">
                   <Drawer.Header>
                     <Drawer.Title>Menu</Drawer.Title>
-                    <Drawer.Close as={Button} iconOnly variant="text" rounded aria-label="Close menu">
+                    <Drawer.Close as={Button} iconOnly variant="text" rounded aria-label="Close menu"
+                      onClick={() => setDrawerOpen(false)}
+                    >
                       <Times />
                     </Drawer.Close>
                   </Drawer.Header>
@@ -84,21 +87,24 @@ export default function Nav() {
                           <li key={s.label}>
                             <Link
                               to={s.path}
+                              onClick={() => setDrawerOpen(false)} 
                               className="block px-4 py-3 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
                             >
                               {s.label}
                             </Link>
                           </li>
                         )) : currentUser?.role === 'SUPPLIER' ?
-                          PHARMACIST_SECTIONS.map((s) => (
+                          SUPPLIER_SECTIONS.map((s) => (
                             <li key={s.label}>
                               <Link
                                 to={s.path}
+                                onClick={() => setDrawerOpen(false)}
                                 className="block px-4 py-3 text-sm font-medium text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
                               >
                                 {s.label}
                               </Link>
-                            </li>)) : " "}
+                            </li>
+                          )) : " "}
                     </ul>
                   </Drawer.Content>
                 </Drawer.Popup>
@@ -114,7 +120,7 @@ export default function Nav() {
           </div>
         </div>
 
-        {/* Center Desktop Navigation (Only visible when logged in) */}
+        {/* Center Desktop Navigation */}
         {currentUser && (
           <NavigationMenu className="hidden! md:flex! items-center gap-1">
             {currentUser?.role === 'PHARMACIST' ?
@@ -134,11 +140,12 @@ export default function Nav() {
                     className="px-3.5 py-2 text-sm font-medium rounded-xl text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors"
                   >
                     {s.label}
-                  </Link>)): " "}
+                  </Link>
+                )) : " "}
           </NavigationMenu>
         )}
 
-        {/* Right Section: Profile Dropdown (Authenticated) or Sign In Button (Unauthenticated) */}
+        {/* Right Section */}
         <div className="flex items-center gap-2">
           {currentUser ? (
             <Menu.Root>
@@ -150,11 +157,9 @@ export default function Nav() {
 
               <Menu.Portal>
                 <Menu.Positioner align="end" sideOffset={12}>
-
-                  {/* Menu Card Container */}
                   <Menu.Popup className="w-68 rounded-2xl border border-slate-200/80 bg-white p-2.5 shadow-2xl ring-1 ring-slate-900/5">
 
-                    {/* User Info Header Card */}
+                    {/* User Info Header */}
                     <div
                       onClick={() => navigate('/')}
                       className="flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-sky-50 to-indigo-50/50 border border-sky-100 cursor-pointer mb-2"
@@ -178,7 +183,6 @@ export default function Nav() {
 
                     <Menu.Separator className="my-1.5 border-t border-slate-100" />
 
-                    {/* Dropdown Options */}
                     <Menu.List className="flex flex-col gap-1">
                       <Menu.Group>
                         <Menu.Item
@@ -219,7 +223,6 @@ export default function Nav() {
               </Menu.Portal>
             </Menu.Root>
           ) : (
-            /* Sign In Button for Unauthenticated Users */
             <Button
               onClick={() => navigate('/login')}
               className="px-4 py-2 text-sm font-semibold text-white bg-sky-600 hover:bg-sky-700 rounded-xl transition-colors shadow-xs cursor-pointer"

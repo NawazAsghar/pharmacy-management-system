@@ -20,7 +20,12 @@ def updateInventory(sender, instance, **kwargs):
                     strength=bi.strength)
 
                 inventory_item, created = Inventory.objects.get_or_create(
-                    item = item_obj, strength = bi.strength, brand = bi.brand,  defaults={'quantity':0}
+                    item=item_obj,
+                    strength=bi.strength,  
+                    defaults={
+                        'quantity': 0,
+                        'brand': bi.brand      
+                    }
                     )
 
                 inventory_item.quantity += bi.quantity

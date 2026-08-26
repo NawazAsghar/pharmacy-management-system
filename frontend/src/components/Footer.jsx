@@ -62,7 +62,7 @@ export default function Footer() {
 
         {/* Column 2: Quick Links */}
         <div>
-          <h4 style={{ color: "rgb(68 69 71);", fontSize: "0.9rem", fontWeight: "700", marginBottom: "0.75rem" }}>
+          <h4 style={{ color: "rgb(68 69 71)", fontSize: "0.9rem", fontWeight: "700", marginBottom: "0.75rem" }}>
             Quick Links
           </h4>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -74,7 +74,7 @@ export default function Footer() {
 
         {/* Column 3: Categories */}
         <div>
-          <h4 style={{ color: "rgb(68 69 71);", fontSize: "0.9rem", fontWeight: "700", marginBottom: "0.75rem" }}>
+          <h4 style={{ color: "rgb(68 69 71)", fontSize: "0.9rem", fontWeight: "700", marginBottom: "0.75rem" }}>
             Popular Categories
           </h4>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -86,7 +86,7 @@ export default function Footer() {
 
         {/* Column 4: Contact & Hours */}
         <div>
-          <h4 style={{ color: "rgb(68 69 71);", fontSize: "0.9rem", fontWeight: "700", marginBottom: "1rem" }}>
+          <h4 style={{ color: "rgb(68 69 71)", fontSize: "0.9rem", fontWeight: "700", marginBottom: "1rem" }}>
             Contact & Hours
           </h4>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
@@ -142,7 +142,7 @@ export default function Footer() {
       <div
         style={{
           borderTop: "1px solid #1e293b",
-          backgroundColor: "rgb(248 250 236 / 54%);",
+          backgroundColor: "rgb(248 250 236 / 54%)",
           padding: "1rem 1.5rem",
         }}
       >

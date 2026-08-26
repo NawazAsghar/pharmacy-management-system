@@ -9,8 +9,10 @@ import { Avatar } from "primereact/avatar";
 import { Badge } from "primereact/badge";
 import { ProgressSpinner } from "primereact/progressspinner";
 import api from "../API";
+import { useNavigate } from "react-router-dom";
 
 export default function TotalBills() {
+  const navigate = useNavigate();
   const [totalBills, setTotalBills] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -168,6 +170,7 @@ export default function TotalBills() {
       `}</style>
 
       {/* Header Bar */}
+      {/* Header Bar */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem", flexWrap: "wrap", gap: "0.75rem" }}>
         <div>
           <h1 style={{ fontSize: "1.5rem", fontWeight: "700", color: "#0f172a", margin: 0 }}>
@@ -177,14 +180,24 @@ export default function TotalBills() {
             Monitor transactions, pharmacist logs, and line-item details.
           </p>
         </div>
-        <Button 
-          label="Refresh Data" 
-          icon="pi pi-refresh" 
-          className="p-button-outlined p-button-secondary" 
-          onClick={getAllBills} 
-          loading={loading}
-          style={{ borderRadius: "6px", padding: "0.45rem 0.85rem", fontSize: "0.85rem" }}
-        />
+
+        {/* Buttons group */}
+        <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
+          <Button
+            label="Create Counter Bill"
+            icon="pi pi-plus"
+            onClick={() => navigate('/counterBill/')}
+            style={{ borderRadius: "6px", padding: "0.45rem 0.85rem", fontSize: "0.85rem", backgroundColor: "#2563eb", borderColor: "#2563eb", color: "#ffffff" }}
+          />
+          <Button
+            label="Refresh Data"
+            icon="pi pi-refresh"
+            className="p-button-outlined p-button-secondary"
+            onClick={getAllBills}
+            loading={loading}
+            style={{ borderRadius: "6px", padding: "0.45rem 0.85rem", fontSize: "0.85rem" }}
+          />
+        </div>
       </div>
 
       {/* KPI Stats Widgets */}
@@ -227,10 +240,10 @@ export default function TotalBills() {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem", flexWrap: "wrap", gap: "0.75rem" }}>
         <span className="p-input-icon-left" style={{ width: "100%", maxWidth: "340px" }}>
           <i className="pi pi-search" style={{ color: "#94a3b8" }} />
-          <InputText 
-            value={searchQuery} 
-            onChange={(e) => setSearchQuery(e.target.value)} 
-            placeholder="Search Pharmacist or Bill ID..." 
+          <InputText
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search Pharmacist or Bill ID..."
             style={{ width: "100%", borderRadius: "6px", paddingLeft: "2.3rem", padding: "0.45rem 0.45rem 0.45rem 2.3rem", fontSize: "0.875rem" }}
           />
         </span>
@@ -253,8 +266,8 @@ export default function TotalBills() {
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))", gap: "1rem" }}>
           {filteredBills.map((bill) => (
-            <Card 
-              key={bill.id} 
+            <Card
+              key={bill.id}
               style={{ borderRadius: "10px", border: "1px solid #e2e8f0", boxShadow: "0 1px 3px rgba(0,0,0,0.02)" }}
             >
               <div>
@@ -290,12 +303,12 @@ export default function TotalBills() {
                   </span>
                 </div>
 
-                <Button 
-                  label="View Detailed Receipt" 
-                  icon="pi pi-receipt" 
-                  style={{ 
-                    width: "100%", 
-                    borderRadius: "6px", 
+                <Button
+                  label="View Detailed Receipt"
+                  icon="pi pi-receipt"
+                  style={{
+                    width: "100%",
+                    borderRadius: "6px",
                     padding: "0.5rem",
                     backgroundColor: "#2563eb",
                     borderColor: "#2563eb",
@@ -313,9 +326,9 @@ export default function TotalBills() {
       )}
 
       {/* Floating Centered Receipt Modal */}
-      <Dialog 
-        header={`Digital Receipt — Invoice #${selectedBill?.id || ""}`} 
-        visible={isReceiptOpen} 
+      <Dialog
+        header={`Digital Receipt — Invoice #${selectedBill?.id || ""}`}
+        visible={isReceiptOpen}
         onHide={() => setIsReceiptOpen(false)}
         style={{ width: "90vw", maxWidth: "480px" }}
         modal
@@ -352,8 +365,8 @@ export default function TotalBills() {
                 const qty = Number(item.quantity || 1);
                 const subtotal = itemPrice * qty;
                 return (
-                  <div 
-                    key={idx} 
+                  <div
+                    key={idx}
                     style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.45rem 0", borderBottom: "1px solid #f1f5f9", fontSize: "0.825rem" }}
                   >
                     <div>
@@ -379,10 +392,10 @@ export default function TotalBills() {
               </span>
             </div>
 
-            <Button 
-              label="Print Receipt" 
-              icon="pi pi-print" 
-              className="no-print" 
+            <Button
+              label="Print Receipt"
+              icon="pi pi-print"
+              className="no-print"
               style={{ width: "100%", marginTop: "1rem", borderRadius: "6px", padding: "0.6rem", backgroundColor: "#0f172a", borderColor: "#0f172a", color: "#ffffff", fontWeight: "600", fontSize: "0.85rem" }}
               onClick={() => window.print()}
             />

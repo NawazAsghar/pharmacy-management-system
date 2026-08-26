@@ -31,7 +31,7 @@ function App() {
         { path: '/stockOrder', element: <StockOrder /> },
         { path: '/stockOrderList', element: <OrderStockList /> },
         { path: '/counterBill', element: <CounterBill /> },
-        { path: '/totalBills', element: <TotalBills /> },
+        { path: '/Bills', element: <TotalBills /> },
         { path: '/Dashboard', element: <Dashboard /> },
       ]
     }
