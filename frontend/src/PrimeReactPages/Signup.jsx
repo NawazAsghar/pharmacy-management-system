@@ -35,8 +35,7 @@ export default function Signup() {
     const fetchRoles = () => {
       setRoleOptions([
         { label: "Pharmacist", value: "PHARMACIST" },
-        { label: "Supplier", value: "SUPPLIER" },
-        { label: "Customer", value: "CUSTOMER" }
+        { label: "Supplier", value: "SUPPLIER" }
       ]);
     };
     fetchRoles();
@@ -127,7 +126,7 @@ export default function Signup() {
                     <InputText
                       id="first_name"
                       {...field}
-                      placeholder="John"
+                      placeholder="Your name"
                       className={errors.first_name ? "p-invalid" : ""}
                       style={{ width: "100%", borderRadius: "8px" }}
                     />
@@ -147,7 +146,7 @@ export default function Signup() {
                     <InputText
                       id="last_name"
                       {...field}
-                      placeholder="Doe"
+                      placeholder="Your last name"
                       className={errors.last_name ? "p-invalid" : ""}
                       style={{ width: "100%", borderRadius: "8px" }}
                     />
@@ -170,7 +169,7 @@ export default function Signup() {
                     <InputText
                       id="username"
                       {...field}
-                      placeholder="johndoe"
+                      placeholder="Enter your username"
                       className={errors.username ? "p-invalid" : ""}
                       style={{ width: "100%", borderRadius: "8px" }}
                     />
@@ -197,7 +196,7 @@ export default function Signup() {
                       id="email"
                       type="email"
                       {...field}
-                      placeholder="john@example.com"
+                      placeholder="youremail@example.com"
                       className={errors.email ? "p-invalid" : ""}
                       style={{ width: "100%", borderRadius: "8px" }}
                     />
@@ -251,7 +250,7 @@ export default function Signup() {
                       id="phone"
                       type="number"
                       {...field}
-                      placeholder="03001234567"
+                      placeholder="0311......"
                       className={errors.phone ? "p-invalid" : ""}
                       style={{ width: "100%", borderRadius: "8px" }}
                     />
