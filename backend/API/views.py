@@ -93,7 +93,7 @@ class SupplierHistory(viewsets.ModelViewSet):
     serializer_class = Order_serializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['supplier']
-    permission_classes = [IsPharmacist | IsAdminUser]
+    permission_classes = [IsPharmacist | IsSupplier | IsAdminUser]
 
 class PharmacistBill_history(viewsets.ModelViewSet):
     queryset = Bill.objects.all().order_by('-created_at')
