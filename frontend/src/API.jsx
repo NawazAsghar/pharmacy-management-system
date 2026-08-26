@@ -7,7 +7,7 @@ create a custom axios instance and name it api.
 const api = axios.create({
     // set base url for all the request 
     // if we do api.post('/login/'), it will actually go to '/api/login/'. we dont have to repeat '/api/' in every request. its like the vite proxy.
-    baseURL: import.meta.env.VITE_API_BASE_URL + '/api',
+    baseURL: import.meta.env.VITE_API_BASE_URL + 'api',
 
     // Defalut headers that will be sent with every request from this 'api' ie: api.get('/..')
     headers: {
