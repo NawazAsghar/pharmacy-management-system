@@ -125,7 +125,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "https://pharmacy-management-system-green-ten.vercel.app",
 ] #for devlopment only. we will user or orgin in prod
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://pharmacymanagementsystem.up.railway.app",
+    "https://pharmacy-management-system-green-ten.vercel.app",
+]
 from datetime import timedelta
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=7),
