@@ -18,7 +18,7 @@ export default function Dashboard() {
   // API Call 1: Today's Sales
   const getTodaySale = async () => {
     try {
-      const res = await api.get("/bill/");
+      const res = await api.get("/todayBills/");
       let data = res.data || [];
       let totalAmount = 0;
       data.forEach((item) => {
@@ -96,7 +96,7 @@ export default function Dashboard() {
       icon: "pi pi-receipt",
       color: "#059669",
       bgColor: "#ecfdf5",
-      route: "/totalBills/",
+      route: "/counterBill/",
     },
     {
       title: "Stock Orders",
