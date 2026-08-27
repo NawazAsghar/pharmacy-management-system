@@ -28,6 +28,7 @@ export default function Signup() {
   });
 
   const navigate = useNavigate();
+  // It tracks the live input value of the password field in real time as the user types.
   const password = watch("password");
 
   // Fetch roles on component mount

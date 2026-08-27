@@ -10,18 +10,20 @@ import { Menu } from '@primereact/ui/menu';
 import { NavigationMenu } from '@primereact/ui/navigationmenu';
 import logo from '../assets/logo/logo_icon.png';
 import api from '../API';
-
+import {useAuth} from '../context/AuthContext'
 const PHARMACIST_SECTIONS = [
-  { label: 'Bills', path: '/Bills' },
-  { label: 'Suppliers', path: '/suppliers' },
+  { label: 'Dashboard', path: '/dashboard' },
   { label: 'Inventory', path: '/inventory' },
   { label: 'Orders', path: '/stockOrderList' },
+  { label: 'Bills', path: '/Bills' },
+  { label: 'Suppliers', path: '/suppliers' },
 ];
 const SUPPLIER_SECTIONS = [
   { label: 'Orders', path: '/stockOrderList' },
 ];
 
 export default function Nav() {
+  const {logout} = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [currentUser, setCurrentUser] = useState(null);
@@ -44,9 +46,7 @@ export default function Nav() {
   };
 
   const logOutFunc = () => {
-    localStorage.removeItem('access');
-    localStorage.removeItem('refresh');
-    setCurrentUser(null);
+    logout();      
     navigate('/login', { replace: true });
   };
 
